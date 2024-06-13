@@ -1,5 +1,5 @@
 // This assignment is inspired by a problem on Exercism (https://exercism.org/tracks/javascript/exercises/etl) that demonstrates Extract-Transform-Load using Scrabble's scoring system. 
-
+let givenWord = "";
 const input = require("readline-sync");
 
 const oldPointStructure = {
@@ -42,7 +42,7 @@ function oldScrabbleScorer(word) {
    for (let i = 0; i < word.length; i++) {
       for (const wordValue in vowelBonusPointStructure) {
          if (vowelBonusPointStructure[wordValue].includes(word[i])) {
-            vowelPoints++;
+            vowelPoints += 3;
       
          } else {
             consonantPoints++;
@@ -71,10 +71,10 @@ function oldScrabbleScorer(word) {
 // your job is to finish writing these functions and variables that we've named //
 // don't change the names or your program won't work as expected. //
 function initialPrompt() {
-   let givenWord = "";
    console.log("Let's play some scrabble! Enter a word:");
    givenWord = input.question("Enter a word: ");
-   return (vowelBonusScorer(givenWord));
+   return givenWord;
+   //return (vowelBonusScorer(givenWord));
    //console.log(simpleScorer(givenWord));
    //return (simpleScorer(givenWord));
    //console.log(oldScrabbleScorer(givenWord));
@@ -82,23 +82,23 @@ function initialPrompt() {
 }
 
 
-const scoringAlgorithms = []; //[simplePlayDisplay, vowelBonusDisplay, scrabbleDisplay];
-let simplePlayDisplay = {
+const scoringAlgorithms = []; 
+scoringAlgorithms[0] = {
    playName: "Simple",
    description: "Each letter is worth 1 point.",
-   scoringFunction: "A function with a parameter for user input that returns a score."
+   scoringFunction: simpleScorer
 };
 
-let vowelBonusDisplay = {
+scoringAlgorithms[1] = {
    playName: "Vowel Bonus",
    description: "Vowels are 3 pts, consonants are 1 pt.",
-   scoringFunction: "A function that returns a score based on the number of vowels and consonants."
+   scoringFunction: vowelBonusScorer
 };
 
-let scrabbleDisplay = {
+scoringAlgorithms[2] = {
    playName: "Scrabble",
    description: "The traditional scoring algorithm.",
-   scoringFunction: "Uses the oldScrabbleScorer() function to determine the score for a given word."
+   scoringFunction: oldScrabbleScorer
 };
 
 
@@ -124,6 +124,18 @@ let scrabbleScorer;
 function scorerPrompt() {
    let scoringChoice = 0;
    scoringChoice = input.question("Which scoring algorithm would you like to use?\n 0 - Simple: One point per character\n 1 - Vowel Bonus: Vowels are worth 3 points\n 2 - Scrabble: Uses scrablle piont system\n Enter 0, 1, or 2: ");
+   console.log(scoringChoice);
+   console.log(scoringAlgorithms);
+   if (scoringChoice = 0){
+      console.log(scoringAlgorithms[0].scoringFunction(givenWord));
+   } else if (scoringChoice = 1){
+      console.log(scoringAlgorithms[1].scoringFunction(givenWord));
+   } else if (scoringChoice = 2){
+      console.log(scoringAlgorithms[2].scoringFunction(givenWord));
+   // } else {
+   //    console.log("Invalid entry, try again: ");
+   //    scorerPrompt();
+   }
    return scoringChoice;
 }
 

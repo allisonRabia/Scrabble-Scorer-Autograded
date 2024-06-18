@@ -21,7 +21,7 @@ function transform(oldPointStructure) {
   for (const oldPointValue in oldPointStructure) {
     let letters = oldPointStructure[oldPointValue];
     for (i = 0; i < letters.length; i++) {
-      newPointStructure[letters[i].toLowerCase()] /**/ = Number(oldPointValue);
+      newPointStructure[letters[i].toLowerCase()] = Number(oldPointValue);
     }
   }
   return newPointStructure;

@@ -26,9 +26,7 @@ function transform(oldPointStructure) {
   }
   return newPointStructure;
 }
-const vowelBonusPointStructure = {
-  3: ["A", "E", "I", "O", "U"],
-};
+const vowelBonusPointStructure = ["A", "E", "I", "O", "U"];
 
 function oldScrabbleScorer(word) {
   word = word.toUpperCase();
@@ -70,14 +68,12 @@ function vowelBonusScorer(word) {
   let consonantPoints = 0;
 
   for (let i = 0; i < word.length; i++) {
-    for (const wordValue in vowelBonusPointStructure) {
-      if (vowelBonusPointStructure[wordValue].includes(word[i])) {
-        vowelPoints += 3;
-      } else {
-        consonantPoints++;
-      }
-      letterPoints = vowelPoints + consonantPoints;
+    if (vowelBonusPointStructure.includes(word[i])) {
+      vowelPoints += 3;
+    } else {
+      consonantPoints++;
     }
+    letterPoints = vowelPoints + consonantPoints;
   }
   console.log(`Your score for '${word}' is: ${letterPoints}`);
   return letterPoints;
@@ -102,7 +98,7 @@ function initialPrompt() {
   return givenWord;
 }
 
-const scoringAlgorithms = [0, 1, 2];
+const scoringAlgorithms = [];
 scoringAlgorithms[0] = {
   playName: "Simple",
   description: "Each letter is worth 1 point.",
